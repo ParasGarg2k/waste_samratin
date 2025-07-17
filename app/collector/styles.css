@@ -11,34 +11,44 @@ body {
   margin: 0;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
-  color: #1f2937; /* Default text color: Very dark gray for better contrast */
+  color: #000000; /* Changed to pure black for maximum contrast */
   background-color: #ffffff; /* Default background color */
 }
 
 /* Collector Root Container */
 .collector-root {
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #e0f2fe, #d1fae5); /* Slightly darker light blue to light green gradient */
-  color: #1f2937; /* Very dark gray text for overall readability */
+  background: linear-gradient(to bottom right, #e3f2fd, #e8f5e9); /* Slightly brighter gradient to make dark text pop */
+  color: #000000; /* Pure black text for overall readability */
   padding: 1rem; /* 16px padding */
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Align to top */
-  position: relative; /* For background image positioning */
-
-  /* Subtle background logo */
-  background-image: url('/images/logo.svg'); /* Assuming logo.svg is in public/images */
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  background-size: 80px;
-  background-attachment: fixed;
-  opacity: 0.05; /* Very faded */
+  position: relative; /* Essential for pseudo-element positioning */
+  overflow: hidden; /* Ensures pseudo-element doesn't overflow */
 }
 
-/* Ensure content is above the subtle background image */
+/* Pseudo-element for the subtle background logo */
+.collector-root::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px; /* Same size as before */
+  height: 80px; /* Same size as before */
+  background-image: url('/images/logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* Ensures the whole logo is visible within its bounds */
+  opacity: 0.05; /* Only the logo is faded */
+  z-index: 0; /* Place it behind the main content */
+}
+
+/* Ensure main content is above the pseudo-element */
 .collector-root > div {
   position: relative;
   z-index: 1;
+  width: 100%; /* Ensure the content div takes full width */
 }
 
 /* Max Width Wrapper */
@@ -69,13 +79,13 @@ body {
 .collector-header h1 {
   font-size: 2.25rem; /* 36px */
   font-weight: 800; /* Extra bold */
-  color: #1e40af; /* Dark blue for main title */
+  color: #0d47a1; /* Even darker blue for main title */
   margin-bottom: 0.5rem; /* 8px margin-bottom */
 }
 
 .collector-header p {
   font-size: 1.125rem; /* 18px */
-  color: #374151; /* Darker gray for subtitle */
+  color: #212121; /* Darker gray for subtitle */
 }
 
 /* Navigation Grid */
@@ -110,7 +120,7 @@ body {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  color: #1f2937; /* Ensure card text is dark */
+  color: #000000; /* Ensure card text is pure black */
 }
 
 .collector-card:hover {
@@ -121,27 +131,27 @@ body {
 .collector-card svg {
   width: 3rem; /* 48px */
   height: 3rem; /* 48px */
-  color: #2563eb; /* Darker blue for card icons */
+  color: #1565c0; /* Even darker blue for card icons */
   margin-bottom: 0.75rem; /* 12px margin-bottom */
 }
 
 .collector-card .card-title {
   font-size: 1.25rem; /* 20px */
   font-weight: 700; /* Bold */
-  color: #1f2937; /* Very dark gray for card titles */
+  color: #000000; /* Pure black for card titles */
   margin-bottom: 0.25rem; /* 4px margin-bottom */
 }
 
 .collector-card .card-desc {
   font-size: 0.875rem; /* 14px */
-  color: #374151; /* Darker gray for card descriptions */
+  color: #212121; /* Darker gray for card descriptions */
 }
 
 /* Error Message */
 .error-message {
   margin-bottom: 1.5rem; /* 24px margin-bottom */
-  background-color: #fef2f2; /* Light red background */
-  border: 1px solid #fee2e2; /* Light red border */
+  background-color: #ffebee; /* Lighter red background */
+  border: 1px solid #ef9a9a; /* Medium red border */
   border-radius: 0.5rem; /* 8px border-radius */
   padding: 1rem; /* 16px padding */
 }
@@ -153,7 +163,7 @@ body {
 .error-message svg {
   height: 1.25rem; /* 20px */
   width: 1.25rem; /* 20px */
-  color: #dc2626; /* Red color for icon */
+  color: #c62828; /* Even darker red for icon */
 }
 
 .error-message-text {
@@ -163,13 +173,13 @@ body {
 .error-message h3 {
   font-size: 0.875rem; /* 14px */
   font-weight: 500; /* Medium font-weight */
-  color: #991b1b; /* Darker red */
+  color: #b71c1c; /* Darkest red */
 }
 
 .error-message p {
   margin-top: 0.25rem; /* 4px margin-top */
   font-size: 0.875rem; /* 14px */
-  color: #b91c1c; /* Darker red */
+  color: #d32f2f; /* Darker red */
 }
 
 /* Support Status */
@@ -177,7 +187,7 @@ body {
   text-align: center;
   font-size: 0.875rem; /* 14px */
   font-weight: 500; /* Medium font-weight */
-  color: #1f2937; /* Darker gray for status text */
+  color: #000000; /* Pure black for status text */
   margin-bottom: 1.5rem; /* 24px margin-bottom */
 }
 
@@ -196,7 +206,7 @@ body {
 .collector-section-title {
   font-size: 1.5rem; /* 24px */
   font-weight: 700; /* Bold */
-  color: #1f2937; /* Dark gray for section titles */
+  color: #000000; /* Pure black for section titles */
 }
 
 .camera-info-badges {
@@ -207,16 +217,16 @@ body {
 
 .camera-info-badges span {
   font-size: 0.75rem; /* 12px */
-  background-color: #e5e7eb; /* Light gray background */
+  background-color: #e0e0e0; /* Medium gray background */
   padding: 0.25rem 0.5rem; /* 4px vertical, 8px horizontal padding */
   border-radius: 0.25rem; /* 4px border-radius */
-  color: #374151; /* Dark gray text */
+  color: #212121; /* Dark gray text */
 }
 
 /* Video Preview Container */
 .video-preview-container {
   position: relative;
-  background-color: #4b5563; /* Darker gray background for video area */
+  background-color: #212121; /* Darker gray background for video area */
   border-radius: 0.5rem; /* 8px border-radius */
   overflow: hidden;
   margin-bottom: 1rem; /* 16px margin-bottom */
@@ -235,7 +245,7 @@ body {
 
 .video-placeholder {
   text-align: center;
-  color: #d1d5db; /* Lighter gray for placeholder text */
+  color: #bdbdbd; /* Lighter gray for placeholder text */
 }
 
 .video-placeholder svg {
@@ -253,11 +263,11 @@ body {
 .video-placeholder .text-xs {
   font-size: 0.75rem; /* 12px */
   margin-top: 0.25rem; /* 4px margin-top */
-  color: #e5e7eb; /* Very light gray for smaller text */
+  color: #e0e0e0; /* Very light gray for smaller text */
 }
 
 .video-placeholder .text-red-400 {
-  color: #fca5a5; /* Lighter red for error text on dark background */
+  color: #ef5350; /* Medium red for error text on dark background */
   margin-top: 0.5rem; /* 8px margin-top */
 }
 
@@ -266,7 +276,7 @@ body {
   position: absolute;
   top: 1rem; /* 16px from top */
   left: 1rem; /* 16px from left */
-  background-color: #dc2626; /* Red background */
+  background-color: #c62828; /* Dark red background */
   color: #ffffff;
   padding: 0.25rem 0.75rem; /* 4px vertical, 12px horizontal padding */
   border-radius: 9999px; /* Fully rounded */
@@ -299,7 +309,7 @@ body {
   position: absolute;
   top: 1rem; /* 16px from top */
   right: 1rem; /* 16px from right */
-  background-color: #10b981; /* Green background */
+  background-color: #2e7d32; /* Darker green background */
   color: #ffffff;
   padding: 0.25rem 0.5rem; /* 4px vertical, 8px horizontal padding */
   border-radius: 0.25rem; /* 4px border-radius */
@@ -330,57 +340,57 @@ body {
 
 .app-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Blue ring on focus */
+  box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.5); /* Darker blue ring on focus */
 }
 
 .app-button.primary {
-  background-color: #2563eb; /* Blue */
+  background-color: #0d47a1; /* Darker blue */
   color: #ffffff;
 }
 
 .app-button.primary:hover {
-  background-color: #1d4ed8; /* Darker blue on hover */
+  background-color: #0b3b8e; /* Even darker blue on hover */
 }
 
 .app-button.danger {
-  background-color: #dc2626; /* Red */
+  background-color: #c62828; /* Darker red */
   color: #ffffff;
 }
 
 .app-button.danger:hover {
-  background-color: #b91c1c; /* Darker red on hover */
+  background-color: #b71c1c; /* Even darker red on hover */
 }
 
 .app-button.secondary {
-  background-color: #4b5563; /* Darker gray for secondary button */
+  background-color: #424242; /* Darker gray for secondary button */
   color: #ffffff;
 }
 
 .app-button.secondary:hover {
-  background-color: #374151; /* Even darker gray on hover */
+  background-color: #212121; /* Even darker gray on hover */
 }
 
 .app-button.warning {
-  background-color: #f59e0b; /* Orange */
+  background-color: #f9a825; /* Darker yellow/orange */
   color: #ffffff;
 }
 
 .app-button.warning:hover {
-  background-color: #d97706; /* Darker orange on hover */
+  background-color: #f57f17; /* Even darker yellow/orange on hover */
 }
 
 .app-button:disabled,
 .app-button.disabled { /* Added .disabled class for explicit control */
-  opacity: 0.6; /* Slightly less opaque for better visibility */
+  opacity: 0.5;
   cursor: not-allowed;
-  background-color: #9ca3af; /* Medium gray for disabled */
-  color: #e5e7eb; /* Very light gray text for disabled */
+  background-color: #9e9e9e; /* Medium gray for disabled */
+  color: #e0e0e0; /* Light gray text for disabled */
 }
 
 /* Audio Guide Section */
 .collector-audio-guide {
   margin-top: 1.5rem; /* 24px margin-top */
-  background-color: #f3f4f6; /* Light gray background */
+  background-color: #f5f5f5; /* Slightly darker light gray background */
   padding: 1.5rem; /* 24px padding */
   border-radius: 0.5rem; /* 8px border-radius */
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* Inner shadow */
@@ -392,7 +402,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem; /* 8px margin-bottom */
-  background-color: #f59e0b; /* Orange */
+  background-color: #f9a825; /* Darker yellow/orange */
   color: #ffffff;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -402,7 +412,7 @@ body {
 }
 
 .audio-guide-button:hover {
-  background-color: #d97706; /* Darker orange on hover */
+  background-color: #f57f17; /* Even darker yellow/orange on hover */
 }
 
 .audio-title {
@@ -410,7 +420,7 @@ body {
   font-size: 1.125rem; /* 18px */
   margin-top: 1rem; /* 16px margin-top */
   margin-bottom: 0.5rem; /* 8px margin-bottom */
-  color: #1f2937; /* Ensure audio title text is dark */
+  color: #000000; /* Pure black for audio title text */
 }
 
 .collector-audio-guide audio {
@@ -431,7 +441,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better focus */
+  background-color: rgba(0, 0, 0, 0.8); /* Even darker overlay for better focus */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -443,18 +453,18 @@ body {
   background-color: #ffffff; /* White background */
   padding: 2rem; /* 32px padding */
   border-radius: 0.5rem; /* 8px border-radius */
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08); /* Stronger shadow */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.16); /* Stronger shadow */
   max-width: 32rem; /* 512px max-width */
   width: 100%;
   margin: 1rem; /* 16px margin for small screens */
   position: relative;
-  color: #1f2937; /* Ensure modal text is dark */
+  color: #000000; /* Ensure modal text is pure black */
 }
 
 .collector-modal h2 {
   font-size: 1.875rem; /* 30px */
   font-weight: 800; /* Extra bold */
-  color: #1f2937; /* Dark gray for modal title */
+  color: #000000; /* Pure black for modal title */
   margin-bottom: 1.5rem; /* 24px margin-bottom */
   text-align: center;
 }
@@ -469,7 +479,7 @@ body {
   display: block;
   font-size: 0.875rem; /* 14px */
   font-weight: 500; /* Medium font-weight */
-  color: #374151; /* Dark gray for labels */
+  color: #212121; /* Dark gray for labels */
   margin-bottom: 0.5rem; /* 8px margin-bottom */
   text-transform: capitalize;
 }
@@ -495,12 +505,12 @@ body {
 }
 
 .star-icon.filled {
-  color: #facc15; /* Brighter yellow for filled stars */
+  color: #ffb300; /* Even brighter yellow for filled stars */
   fill: currentColor;
 }
 
 .star-icon.empty {
-  color: #9ca3af; /* Darker gray for empty stars */
+  color: #616161; /* Darker gray for empty stars */
   fill: none;
 }
 
@@ -520,8 +530,8 @@ body {
 .radio-input {
   height: 1rem; /* 16px */
   width: 1rem; /* 16px */
-  color: #2563eb; /* Blue */
-  border-color: #9ca3af; /* Darker gray border */
+  color: #0d47a1; /* Darker blue */
+  border-color: #616161; /* Darker gray border */
   border-radius: 9999px; /* Fully rounded */
   background-color: #ffffff;
   margin-right: 0.5rem; /* 8px margin-right */
@@ -532,8 +542,8 @@ body {
 }
 
 .radio-input:checked {
-  background-color: #2563eb;
-  border-color: #2563eb;
+  background-color: #0d47a1;
+  border-color: #0d47a1;
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e"); /* White dot for checked state */
   background-size: 100% 100%;
   background-position: center;
@@ -541,7 +551,7 @@ body {
 }
 
 .radio-text {
-  color: #374151; /* Dark gray */
+  color: #212121; /* Dark gray */
 }
 
 /* Modal Button Group */
@@ -560,27 +570,27 @@ body {
 }
 
 .modal-buttons .save-button {
-  background-color: #16a34a; /* Green */
+  background-color: #2e7d32; /* Darker green */
   color: #ffffff;
 }
 
 .modal-buttons .save-button:hover {
-  background-color: #15803d; /* Darker green on hover */
+  background-color: #1b5e20; /* Even darker green on hover */
 }
 
 .modal-buttons .cancel-button {
-  background-color: #6b7280; /* Darker gray for cancel button */
+  background-color: #616161; /* Darker gray for cancel button */
   color: #ffffff;
 }
 
 .modal-buttons .cancel-button:hover {
-  background-color: #4b5563; /* Even darker gray on hover */
+  background-color: #424242; /* Even darker gray on hover */
 }
 
 /* Loading Spinner */
 .loading-spinner {
   animation: spin 1s linear infinite;
-  border: 2px solid #2563eb; /* Blue */
+  border: 2px solid #0d47a1; /* Darker blue */
   border-bottom-color: transparent;
   border-radius: 50%;
   height: 8rem; /* 128px */
@@ -596,7 +606,7 @@ body {
 }
 
 .loading-text {
-  color: #1f2937; /* Darker gray for loading text */
+  color: #000000; /* Pure black for loading text */
 }
 
 /* General flex utilities that were commonly used in Tailwind, now explicitly defined */
@@ -656,38 +666,39 @@ body {
 
 /* Colors for text (adjusted for better contrast) */
 .text-white { color: #ffffff; }
-.text-gray-300 { color: #9ca3af; } /* Darker gray */
-.text-gray-400 { color: #6b7280; } /* Even darker gray */
-.text-gray-500 { color: #4b5563; } /* Darker still */
-.text-gray-600 { color: #374151; } /* Darker */
-.text-gray-700 { color: #1f2937; } /* Very dark gray */
-.text-gray-800 { color: #111827; } /* Almost black */
-.text-yellow-400 { color: #facc15; } /* Brighter yellow */
-.text-red-400 { color: #ef4444; } /* Brighter red */
-.text-red-700 { color: #b91c1c; } /* Darker red */
-.text-red-800 { color: #991b1b; } /* Even darker red */
-.text-blue-600 { color: #2563eb; } /* Blue */
-.text-blue-800 { color: #1e40af; } /* Dark blue */
+.text-gray-300 { color: #757575; } /* Darker gray */
+.text-gray-400 { color: #616161; } /* Even darker gray */
+.text-gray-500 { color: #424242; } /* Darker still */
+.text-gray-600 { color: #212121; } /* Darker */
+.text-gray-700 { color: #000000; } /* Pure black */
+.text-gray-800 { color: #000000; } /* Pure black */
+.text-yellow-400 { color: #ffb300; } /* Brighter yellow */
+.text-red-400 { color: #ef5350; } /* Brighter red */
+.text-red-700 { color: #c62828; } /* Darker red */
+.text-red-800 { color: #b71c1c; } /* Even darker red */
+.text-blue-600 { color: #0d47a1; } /* Blue */
+.text-blue-800 { color: #0d47a1; } /* Dark blue */
 .text-xs { font-size: 0.75rem; } /* 12px */
 .text-sm { font-size: 0.875rem; } /* 14px */
 
 /* Background colors (adjusted for better contrast) */
 .bg-white { background-color: #ffffff; }
-.bg-gray-100 { background-color: #e5e7eb; } /* Slightly darker light gray */
-.bg-gray-400 { background-color: #9ca3af; } /* Darker gray */
-.bg-gray-900 { background-color: #111827; } /* Keep dark for video background */
-.bg-red-50 { background-color: #fef2f2; }
-.bg-red-500 { background-color: #dc2626; } /* Darker red */
-.bg-green-500 { background-color: #10b981; } /* Darker green */
-.bg-green-600 { background-color: #16a34a; }
-.hover\:bg-green-700:hover { background-color: #15803d; }
-.hover\:bg-gray-500:hover { background-color: #6b7280; }
-.hover\:bg-red-700:hover { background-color: #b91c1c; }
-.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
-.hover\:bg-yellow-700:hover { background-color: #d97706; }
+.bg-gray-100 { background-color: #f5f5f5; } /* Slightly darker light gray */
+.bg-gray-400 { background-color: #9e9e9e; } /* Darker gray */
+.bg-gray-900 { background-color: #212121; } /* Keep dark for video background */
+.bg-red-50 { background-color: #ffebee; }
+.bg-red-500 { background-color: #d32f2f; } /* Darker red */
+.bg-green-500 { background-color: #388e3c; } /* Darker green */
+.bg-green-600 { background-color: #2e7d32; }
+.hover\:bg-green-700:hover { background-color: #1b5e20; }
+.hover\:bg-gray-500:hover { background-color: #616161; }
+.hover\:bg-red-700:hover { background-color: #b71c1c; }
+.hover\:bg-blue-700:hover { background-color: #0b3b8e; }
+.hover\:bg-yellow-700:hover { background-color: #f57f17; }
 
 /* Borders */
 .border { border-width: 1px; border-style: solid; }
 .border-b-2 { border-bottom-width: 2px; }
-.border-blue-600 { border-color: #2563eb; }
-.border-red-200 { border-color: #fca5a5; } /* Lighter red border for error box */
+.border-blue-600 { border-color: #0d47a1; } /* Darker blue */
+.border-red-200 { border-color: #ef9a9a; } /* Medium red border for error box */
+.border-gray-300 { border-color: #e0e0e0; } /* Light gray border */
