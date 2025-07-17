@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+pymongo
+bson
+opencv-python
+numpy
+whisper
