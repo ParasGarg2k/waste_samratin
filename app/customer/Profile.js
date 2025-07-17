@@ -25,7 +25,7 @@ const Profile = () => {
   const userData = {
     name: "Sarah Johnson",
     email: "sarah.johnson@email.com",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=50&h=50&fit=crop&crop=face",
     joinDate: "2023-06-15",
     totalWaste: 45.2,
     accuracyRate: 94.5,
@@ -103,12 +103,14 @@ const Profile = () => {
     }
   };
 
+  // In Profile.js
+
   const getRankColor = (rank) => {
     switch (rank) {
-      case 1: return "bg-gradient-to-r from-yellow-400 to-yellow-600";
-      case 2: return "bg-gradient-to-r from-gray-300 to-gray-500";
-      case 3: return "bg-gradient-to-r from-amber-500 to-amber-700";
-      default: return "bg-white";
+      case 1: return 'rank-gold';   // Changed
+      case 2: return 'rank-silver'; // Changed
+      case 3: return 'rank-bronze'; // Changed
+      default: return 'bg-white';
     }
   };
 

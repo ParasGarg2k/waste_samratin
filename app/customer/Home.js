@@ -27,6 +27,7 @@ import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import "./styles.css"; // Import the combined styles.css
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('classifier');
@@ -55,7 +56,7 @@ const Home = () => {
       id: 3,
       title: "AI Technology in Waste Management",
       excerpt: "Discover how artificial intelligence is revolutionizing waste classification and recycling processes.",
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1485827404704-89b55fcc595e?w=400&h=250&fit=crop",
       category: "Technology",
       readTime: "6 min read",
       date: "2024-01-10"
@@ -112,7 +113,7 @@ const Home = () => {
       <Container maxWidth="xl">
         {/* Hero Section */}
         <motion.div 
-          className="text-center py-12"
+          className="hero-section" // Replaced text-center py-12
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -130,12 +131,13 @@ const Home = () => {
             {stats.map((stat, index) => (
               <Grid item xs={6} md={3} key={stat.label}>
                 <motion.div
-                  className="card p-4 text-center"
+                  className="stat-card" // Replaced card p-4 text-center
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <stat.icon className={`w-8 h-8 mx-auto mb-2 ${stat.color}`} />
+                  {/* Apply stat-icon class and specific color classes */}
+                  <stat.icon className={`stat-icon ${stat.color}`} />
                   <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: 'text.primary' }}>
                     {stat.value}
                   </Typography>
@@ -159,7 +161,8 @@ const Home = () => {
               ].map((tab) => (
                 <Tab
                   key={tab.id}
-                  icon={<tab.icon className="w-4 h-4" />}
+                  // Apply icon-sm class for icon sizing
+                  icon={<tab.icon className="icon-sm" />}
                   label={tab.label}
                   value={tab.id}
                   sx={activeTab === tab.id ? { fontWeight: 'bold' } : { fontWeight: 'normal' }}
@@ -199,13 +202,13 @@ const Home = () => {
                   {wasteCategories.map((category, index) => (
                     <Grid item xs={12} md={6} key={category.name}>
                       <motion.div
-                        className={`waste-card ${category.color} p-6`}
+                        className={`waste-card ${category.color}`} // Replaced p-6
                         initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                       >
                         <Stack direction="row" alignItems="center" spacing={1} mb={1}>
-                          <span className="text-2xl">{category.icon}</span>
+                          <span className="text-2xl">{category.icon}</span> {/* Apply text-2xl class */}
                           <Typography variant="h6" component="h3" sx={{ fontWeight: 'bold' }}>
                             {category.name}
                           </Typography>
@@ -229,7 +232,8 @@ const Home = () => {
                 {/* Tips Section */}
                 <Card sx={{ mt: 4, p: 3 }}>
                   <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
-                    <Lightbulb className="w-6 h-6 text-yellow-500" />
+                    {/* Apply stat-icon class for Lightbulb */}
+                    <Lightbulb className="stat-icon text-yellow-500" /> 
                     <Typography variant="h6" component="h3" sx={{ fontWeight: 'bold' }}>
                       Pro Tips for Better Segregation
                     </Typography>
@@ -287,7 +291,7 @@ const Home = () => {
                   {blogs.map((blog, index) => (
                     <Grid item xs={12} md={4} key={blog.id}>
                       <motion.article
-                        className="card overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                        className="blog-card" // Replaced card overflow-hidden hover:shadow-xl transition-shadow duration-300
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -315,7 +319,7 @@ const Home = () => {
                             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                               {new Date(blog.date).toLocaleDateString()}
                             </Typography>
-                            <Button variant="text" startIcon={<ChevronRight className="w-4 h-4" />} sx={{ textTransform: 'none' }}>
+                            <Button variant="text" startIcon={<ChevronRight className="icon-sm" />} sx={{ textTransform: 'none' }}> {/* Apply icon-sm class */}
                               Read More
                             </Button>
                           </Stack>
@@ -333,4 +337,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;

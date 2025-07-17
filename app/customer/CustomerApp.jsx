@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 import Home from "./Home";
 import Activity from "./Activity";
 import Profile from "./Profile";
-import "./App.css";
+import "./styles.css"; // Import the combined styles.css
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -21,7 +21,8 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-eco-light via-white to-eco-light">
+      {/* Apply app-container class for background and min-height */}
+      <div className="app-container">
         <Toaster
           position="top-right"
           toastOptions={{
@@ -42,7 +43,8 @@ function App() {
 
         <Navbar currentTab={currentTab} setCurrentTab={setCurrentTab} />
 
-        <main className="pt-20 pb-24 px-4 sm:px-6 lg:px-8">
+        {/* Apply main-content class for padding */}
+        <main className="main-content">
           <AnimatePresence mode="wait">
             <Routes>
               <Route

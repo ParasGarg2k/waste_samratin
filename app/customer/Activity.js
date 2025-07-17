@@ -373,7 +373,7 @@ const Activity = () => {
                   &lt;
                 </button>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  {today.toLocaleString('default', { month: 'long' })} {calendarYear}
+                  {new Date(calendarYear, calendarMonth).toLocaleString('default', { month: 'long' })} {calendarYear}
                 </h3>
                 <button
                   className="p-2 rounded-full hover:bg-gray-200"
@@ -523,4 +523,4 @@ const Activity = () => {
   );
 };
 
-export default Activity; 
+export default Activity;
