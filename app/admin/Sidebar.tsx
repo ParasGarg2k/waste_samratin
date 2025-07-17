@@ -10,14 +10,20 @@ interface Tab {
 }
 
 interface SidebarProps {
-  activeTab: string
-  onTabChange: (tab: string) => void
-  tabs: Tab[]
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+  tabs: Tab[];
+  isCollapsed: boolean;
+  onCollapsedChange: (collapsed: boolean) => void;
 }
 
-export default function Sidebar({ activeTab, onTabChange, tabs }: SidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false)
-
+export default function Sidebar({ 
+  activeTab, 
+  onTabChange, 
+  tabs,
+  isCollapsed,
+  onCollapsedChange 
+}: SidebarProps) {
   const sidebarClass = `admin-sidebar ${isCollapsed ? 'collapsed' : ''}`
 
   const getIcon = (icon: string) => {
@@ -36,14 +42,14 @@ export default function Sidebar({ activeTab, onTabChange, tabs }: SidebarProps) 
   }
 
   return (
-    <aside className={`relative flex flex-col h-screen bg-white/90 shadow-xl border-r border-gray-200 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
+    <aside className={`admin-sidebar ${isCollapsed ? 'collapsed' : ''}`} style={{ width: isCollapsed ? '4rem' : '16rem' }}>
       {/* Top Section */}
-      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+      <div className="sidebar-header">
         {!isCollapsed && (
-          <span className="text-xl font-bold text-primary-600 tracking-wide">Waste Admin</span>
+          <span className="fw-bold fs-5">Waste Admin</span>
         )}
         <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
+          onClick={() => onCollapsedChange(!isCollapsed)}
           className="p-2 rounded-lg hover:bg-gray-100"
         >
           {isCollapsed ? <Menu className="w-5 h-5" /> : <X className="w-5 h-5" />}
@@ -51,46 +57,40 @@ export default function Sidebar({ activeTab, onTabChange, tabs }: SidebarProps) 
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-2 py-6">
-        <ul className="space-y-2">
+      <nav className="flex-1 py-4">
+        <div className="nav-items">
           {tabs.map((tab) => (
-            <li key={tab.id}>
-              <button
-                onClick={() => onTabChange(tab.id)}
-                className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200 font-medium text-base
-                  ${activeTab === tab.id
-                    ? 'bg-primary-100 text-primary-700 shadow-md'
-                    : 'text-gray-600 hover:bg-gray-100'}
-                  ${isCollapsed ? 'justify-center' : ''}`}
-              >
-                {getIcon(tab.icon)}
-                {!isCollapsed && <span>{tab.name}</span>}
-              </button>
-            </li>
+            <button
+              key={tab.id}
+              onClick={() => onTabChange(tab.id)}
+              className={`nav-item ${activeTab === tab.id ? 'active' : ''}`}
+              style={{ justifyContent: isCollapsed ? 'center' : 'flex-start' }}
+            >
+              {getIcon(tab.icon)}
+              {!isCollapsed && <span className="nav-text">{tab.name}</span>}
+            </button>
           ))}
-        </ul>
+        </div>
       </nav>
 
       {/* User Info & Logout */}
       {!isCollapsed && (
-        <div className="absolute bottom-0 left-0 w-full px-6 pb-6">
-          <div className="border-t pt-4">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-9 h-9 bg-primary-100 rounded-full flex items-center justify-center">
-                <User className="w-5 h-5 text-primary-600" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900 leading-none">Admin User</p>
-                <p className="text-xs text-gray-500 leading-none">admin@waste.com</p>
-              </div>
+        <div className="sidebar-footer">
+          <div className="user-info">
+            <div className="avatar">
+              <User className="w-5 h-5" />
             </div>
-            <button className="w-full flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200 font-medium">
-              <LogOut className="w-5 h-5" />
-              <span>Logout</span>
-            </button>
+            <div>
+              <p className="text-sm fw-semibold mb-0">Admin User</p>
+              <p className="text-xs text-muted mb-0">admin@waste.com</p>
+            </div>
           </div>
+          <button className="nav-item w-100 mb-0">
+            <LogOut className="w-5 h-5" />
+            <span>Logout</span>
+          </button>
         </div>
       )}
     </aside>
   )
-} 
+}

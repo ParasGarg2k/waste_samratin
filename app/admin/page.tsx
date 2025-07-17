@@ -10,6 +10,7 @@ import Header from './Header'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard')
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   const tabs = [
     { id: 'dashboard', name: 'Dashboard', icon: '📊' },
@@ -34,15 +35,19 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="flex">
-        <Sidebar activeTab={activeTab} onTabChange={setActiveTab} tabs={tabs} />
-        <div className="flex-1">
-          <Header />
-          <main className="p-6">
-            {renderTabContent()}
-          </main>
-        </div>
+    <div className="admin-layout">
+      <Sidebar
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        tabs={tabs}
+        isCollapsed={isSidebarCollapsed}
+        onCollapsedChange={setIsSidebarCollapsed}
+      />
+      <div className={`admin-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+        <Header isSidebarCollapsed={isSidebarCollapsed} />
+        <main>
+          {renderTabContent()}
+        </main>
       </div>
     </div>
   )
