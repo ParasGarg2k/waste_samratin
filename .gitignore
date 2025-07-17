@@ -1,0 +1,50 @@
+# === Node Modules ===
+node_modules/
+
+# === Build Output ===
+.next/
+out/
+
+# === Logs ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+log.txt
+
+# === Environment Variables ===
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# === OS & Editor Files ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === Testing Coverage ===
+coverage/
+
+# === Misc ===
+*.log
+*.tsbuildinfo
+
+# === Next.js Cache ===
+.next/
+.vercel/
+
+# === Static Export ===
+out/
+
+# === Optional: Custom Build Output ===
+build/
+dist/
+
+# === Optional: Local Tools ===
+.local/
