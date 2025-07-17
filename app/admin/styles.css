@@ -1,0 +1,265 @@
+/* Modern Theme Variables */
+:root {
+  --primary-color: #00B894;
+  --primary-gradient: linear-gradient(135deg, #00B894 0%, #00D1A0 100%);
+  --secondary-color: #6C5CE7;
+  --secondary-gradient: linear-gradient(135deg, #6C5CE7 0%, #8E7CF7 100%);
+  --background-color: #F0F4F8;
+  --card-bg: #FFFFFF;
+  --text-primary: #2D3748;
+  --text-secondary: #718096;
+  --success-color: #00B894;
+  --warning-color: #F1C40F;
+  --danger-color: #FF6B6B;
+  --info-color: #4299E1;
+  --border-color: #E2E8F0;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --gradient-1: linear-gradient(135deg, #00B894 0%, #38EF7D 100%);
+  --gradient-2: linear-gradient(135deg, #6C5CE7 0%, #a855f7 100%);
+  --gradient-3: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+}
+
+/* Global Styles */
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Layout Styles */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+/* Card Styles */
+.admin-card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-color);
+}
+
+.admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Stat Cards */
+.admin-stat-card {
+  background: var(--gradient-1);
+  color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-stat-card:nth-child(2) {
+  background: var(--gradient-2);
+}
+
+.admin-stat-card:nth-child(3) {
+  background: var(--gradient-3);
+}
+
+.admin-stat-card:nth-child(4) {
+  background: linear-gradient(135deg, #4299E1 0%, #667EEA 100%);
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* Table Styles */
+.admin-table {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-table th {
+  background: var(--background-color);
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.admin-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover {
+  background-color: #F7FAFC;
+}
+
+/* Button Styles */
+.admin-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.admin-btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.admin-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,184,148,0.3);
+}
+
+.btn-icon {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.btn-light {
+  background-color: var(--background-color);
+}
+
+.btn-light:hover {
+  background-color: #E2E8F0;
+}
+
+/* Form Controls */
+.admin-input {
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.admin-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0,184,148,0.1);
+  outline: none;
+}
+
+/* Status Badges */
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.bg-success {
+  background-color: var(--success-color) !important;
+  color: white;
+}
+
+.bg-warning {
+  background-color: var(--warning-color) !important;
+  color: var(--text-primary);
+}
+
+.bg-danger {
+  background-color: var(--danger-color) !important;
+  color: white;
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color) !important;
+  color: white;
+}
+
+/* Input Groups */
+.input-group-text {
+  background-color: transparent;
+  border: none;
+  padding-right: 0;
+}
+
+.input-group .form-control {
+  border: none;
+  padding-left: 0;
+}
+
+.input-group .form-control:focus {
+  box-shadow: none;
+}
+
+/* Scrollbar Styles */
+.admin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(113, 128, 150, 0.3);
+  border-radius: 3px;
+}
+
+/* Animations */
+.admin-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .admin-layout {
+    padding: 1rem;
+  }
+
+  .admin-card {
+    padding: 1rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.75rem 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+}
