@@ -82,6 +82,10 @@ export default function CollectorsTab() {
   return (
     <div className="admin-fade-in">
       {/* Header Section */}
+        <div className="d-flex justify-content-between align-items-center">
+          <h1 className="h3 mb-0">Collectors Management</h1>
+        </div>
+        <p className="text-muted">Manage waste collectors, their status, and performance metrics</p>
       {/* Stats Overview */}
       <div className="row g-4 mb-4">
         <div className="col-12 col-md-6 col-lg-3">

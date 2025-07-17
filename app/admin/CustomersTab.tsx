@@ -1,85 +1,67 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { 
   Search, 
-  Filter, 
   Eye, 
   Download, 
-  Star,
-  AlertTriangle,
-  CheckCircle,
-  Clock,
-  Calendar,
-  MapPin,
-  X,
-  User,
-  Phone,
-  Mail
+  MapPin, 
+  X, 
+  User, 
+  Phone, 
+  Mail, 
+  Star 
 } from 'lucide-react'
 
-interface Customer {
-  id: string
-  name: string
-  location: string
-  status: string
-  lastPickup: string
-  totalRequests: number
-  contactNumber: string
-  email: string
-}
-
 export default function CustomersTab() {
-  const [customers, setCustomers] = useState<Customer[]>([
+  const [customers, setcustomers] = useState([
     {
-      id: '001',
-      name: 'Alice Johnson',
-      location: 'South Zone',
+      id: 1,
+      name: 'John Smith',
+      area: 'North Zone',
       status: 'active',
-      lastPickup: '2025-07-16',
-      totalRequests: 45,
-      contactNumber: '+1234567890',
-      email: 'alice@example.com'
+      rating: 4.1,
+      collections: 12,
+      Accuracy: 78,
+      Weight: 15,
+      phone: '+1234567890',
+      email: 'john.smith@example.com'
     },
     {
-      id: '002',
-      name: 'Bob Smith',
-      location: 'North Zone',
+      id: 2,
+      name: 'Sarah Wilson',
+      area: 'South Zone',
+      status: 'active',
+      rating: 4.5,
+      collections: 9,
+      Accuracy: 80,
+      Weight: 13,
+      phone: '+1234567891',
+      email: 'sarah.wilson@example.com'
+    },
+    {
+      id: 3,
+      name: 'Michael Brown',
+      area: 'East Zone',
       status: 'inactive',
-      lastPickup: '2025-07-15',
-      totalRequests: 30,
-      contactNumber: '+1234567891',
-      email: 'bob@example.com'
+      rating: 3.9,
+      collections: 7,
+      Accuracy: 76,
+      Weight: 11,
+      phone: '+1234567892',
+      email: 'michael.brown@example.com'
     },
     {
-      id: '003',
-      name: 'Charlie Brown',
-      location: 'East Zone',
+      id: 4,
+      name: 'Emily Davis',
+      area: 'West Zone',
       status: 'pending',
-      lastPickup: '2025-07-14',
-      totalRequests: 20,
-      contactNumber: '+1234567892',
-      email: 'charlie@example.com'
-    },
-    {
-      id: '004',
-      name: 'David Wilson',
-      location: 'West Zone',
-      status: 'active',
-      lastPickup: '2025-07-13',
-      totalRequests: 50,
-      contactNumber: '+1234567893',
-      email: 'david@example.com'
-    },
-    {
-      id: '005',
-      name: 'Eva Green',
-      location: 'Central Zone',
-      status: 'inactive',
-      lastPickup: '2025-07-12',
-      totalRequests: 10,
-      contactNumber: '+1234567894',
-      email: 'eva@example.com'
+      rating: 4.3,
+      collections: 10,
+      Accuracy: 82,
+      Weight: 14,
+      phone: '+1234567893',
+      email: 'emily.davis@example.com'
     }
   ])
 
@@ -99,19 +81,70 @@ export default function CustomersTab() {
     }
   }
 
+  const filteredCustomers = customers.filter(c => 
+    (selectedStatus === 'all' || c.status === selectedStatus) &&
+    (c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+     c.area.toLowerCase().includes(searchQuery.toLowerCase()))
+  )
+
   return (
     <div className="admin-fade-in">
       {/* Header Section */}
+      <div className="d-flex justify-content-between align-items-center">
+        <h1 className="h3 mb-0">Customers Management</h1>
+      </div>
+      <p className="text-muted">Manage waste customers, their status, and performance metrics</p>
+
+      {/* Stats Overview */}
+      <div className="row g-4 mb-4">
+        <div className="col-12 col-md-6 col-lg-3">
+          <div className="admin-stat-card">
+            <h3 className="text-white-50 mb-2">Total customers</h3>
+            <div className="stat-value">{customers.length}</div>
+            <div className="mt-2 text-white-50">Active waste customers</div>
+          </div>
+        </div>
+        <div className="col-12 col-md-6 col-lg-3">
+          <div className="admin-stat-card">
+            <h3 className="text-white-50 mb-2">Active Today</h3>
+            <div className="stat-value">
+              {customers.filter(c => c.status === 'active').length}
+            </div>
+            <div className="mt-2 text-white-50">Currently on duty</div>
+          </div>
+        </div>
+        <div className="col-12 col-md-6 col-lg-3">
+          <div className="admin-stat-card">
+            <h3 className="text-white-50 mb-2">Total Collections</h3>
+            <div className="stat-value">
+              {customers.reduce((sum, c) => sum + c.collections, 0)}
+            </div>
+            <div className="mt-2 text-white-50">Waste collections completed</div>
+          </div>
+        </div>
+        <div className="col-12 col-md-6 col-lg-3">
+          <div className="admin-stat-card">
+            <h3 className="text-white-50 mb-2">Average Rating</h3>
+            <div className="stat-value">
+              {(customers.reduce((sum, c) => sum + c.rating, 0) / customers.length).toFixed(1)}
+              <span className="fs-6 ms-1">/ 5.0</span>
+            </div>
+            <div className="mt-2 text-white-50">Customer satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Search and Filters */}
       <div className="admin-card mb-4">
         <div className="row align-items-center">
           <div className="col-12 col-md-6 mb-3 mb-md-0">
             <div className="input-group">
-              <span className="input-group-text">
-                <Search size={18} />
+              <span className="input-group-text border-0 bg-light">
+                <Search size={18} className="text-primary" />
               </span>
               <input
                 type="text"
-                className="form-control admin-input"
+                className="form-control admin-input border-0 bg-light"
                 placeholder="Search customers..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -120,7 +153,7 @@ export default function CustomersTab() {
           </div>
           <div className="col-12 col-md-6 d-flex justify-content-md-end gap-2">
             <select 
-              className="form-select admin-input w-auto"
+              className="form-select admin-input border-0 bg-light"
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
             >
@@ -137,72 +170,89 @@ export default function CustomersTab() {
         </div>
       </div>
 
-      {/* Customers List */}
+      {/* customers List */}
       <div className="admin-card">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h2 className="h5 mb-0">Customers Overview</h2>
+        </div>
         <div className="table-responsive">
           <table className="admin-table">
             <thead>
               <tr>
                 <th>Customer</th>
-                <th>Location</th>
+                <th>Address</th>
                 <th>Status</th>
-                <th>Last Pickup</th>
-                <th>Total Requests</th>
+                <th>Rating</th>
+                <th>Collections</th>
                 <th>Contact</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {customers.map((customer) => (
+              {filteredCustomers.map((customer) => (
                 <tr key={customer.id}>
                   <td>
-                    <div className="d-flex align-items-center gap-2">
-                      <div className="rounded-circle bg-light p-2">
-                        <User size={24} />
+                    <div className="d-flex align-items-center gap-3">
+                      <div className="rounded-circle bg-primary bg-opacity-10 p-2">
+                        <User size={24} className="text-primary" />
                       </div>
                       <div>
-                        <div className="fw-medium">{customer.name}</div>
-                        <div className="text-muted small">#{customer.id}</div>
+                        <div className="fw-semibold text-dark">{customer.name}</div>
+                        <div className="text-muted small">ID: #{customer.id.toString().padStart(4, '0')}</div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div className="d-flex align-items-center gap-1">
-                      <MapPin size={16} />
-                      {customer.location}
+                    <div className="d-flex align-items-center gap-2">
+                      <MapPin size={16} className="text-secondary" />
+                      <span className="fw-medium">{customer.area}</span>
                     </div>
                   </td>
                   <td>
-                    <span className={`badge bg-${getStatusColor(customer.status)}`}>
-                      {customer.status}
+                    <span className={`badge bg-${getStatusColor(customer.status)} bg-opacity-10 text-${getStatusColor(customer.status)} px-3 py-2`}>
+                      {customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}
                     </span>
                   </td>
                   <td>
-                    <div className="d-flex align-items-center gap-1">
-                      <Calendar size={16} />
-                      {customer.lastPickup}
+                    <div className="d-flex align-items-center gap-2">
+                      <div className="d-flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            size={14}
+                            className={i < Math.floor(customer.rating) ? "text-warning fill-warning" : "text-muted"}
+                            fill={i < Math.floor(customer.rating) ? "currentColor" : "none"}
+                          />
+                        ))}
+                      </div>
+                      <span className="fw-semibold">{customer.rating.toFixed(1)}</span>
                     </div>
                   </td>
-                  <td>{customer.totalRequests}</td>
                   <td>
-                    <div className="d-flex flex-column">
-                      <div className="d-flex align-items-center gap-1">
-                        <Phone size={14} />
-                        {customer.contactNumber}
+                    <div className="fw-semibold text-dark">
+                      {customer.collections}
+                      <span className="text-muted small ms-1">pickups</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="d-flex flex-column gap-1">
+                      <div className="d-flex align-items-center gap-2">
+                        <Phone size={14} className="text-primary" />
+                        <span className="fw-medium">{customer.phone}</span>
                       </div>
-                      <div className="d-flex align-items-center gap-1">
-                        <Mail size={14} />
-                        {customer.email}
+                      <div className="d-flex align-items-center gap-2">
+                        <Mail size={14} className="text-primary" />
+                        <span className="text-muted small">{customer.email}</span>
                       </div>
                     </div>
                   </td>
                   <td>
                     <div className="d-flex gap-2">
-                      <button className="btn btn-sm btn-outline-primary">
-                        <Eye size={16} />
+                      <button className="admin-btn btn-icon btn-sm btn-light" title="View Details">
+                        <Eye size={16} className="text-primary" />
                       </button>
-                      <button className="btn btn-sm btn-outline-danger">
-                        <X size={16} />
+                      <button className="admin-btn btn-icon btn-sm btn-light" title="Remove customer">
+                        <X size={16} className="text-danger" />
                       </button>
                     </div>
                   </td>

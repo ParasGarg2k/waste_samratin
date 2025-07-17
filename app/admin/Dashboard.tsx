@@ -1,22 +1,22 @@
 'use client'
 
 import { useState } from 'react'
-import { 
-  Users, 
-  Truck, 
-  Trash2, 
-  TrendingUp, 
+import {
+  Users,
+  Truck,
+  Trash2,
+  TrendingUp,
   AlertTriangle,
   CheckCircle,
   Clock
 } from 'lucide-react'
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   LineChart,
   Line,
@@ -25,158 +25,72 @@ import {
   Cell
 } from 'recharts'
 
-interface DashboardStats {
-  totalCustomers: number
-  totalCollectors: number
-  totalWasteCollected: number
-  averageAccuracy: number
-  pendingComplaints: number
-  todayCollections: number
-  weeklyGrowth: number
-  landfillPercentage: number
-  recyclePercentage: number
-}
-
-interface WeeklyData {
-  day: string
-  waste: number
-  accuracy: number
-}
-
-interface WasteTypeData {
-  name: string
-  value: number
-  color: string
-}
-
-const hardcodedStats = {
-  totalCustomers: 5,
-  totalCollectors: 5,
-  totalWasteCollected: 187.8,
-  averageAccuracy: 77.6,
-  pendingComplaints: 7,
-  todayCollections: 18,
-  weeklyGrowth: 3.2,
-  landfillPercentage: 62,
-  recyclePercentage: 38
-};
-const hardcodedWeeklyData = [
-  { day: 'Mon', waste: 28, accuracy: 75 },
-  { day: 'Tue', waste: 32, accuracy: 78 },
-  { day: 'Wed', waste: 27, accuracy: 80 },
-  { day: 'Thu', waste: 24, accuracy: 76 },
-  { day: 'Fri', waste: 30, accuracy: 79 },
-  { day: 'Sat', waste: 23, accuracy: 74 },
-  { day: 'Sun', waste: 23.8, accuracy: 80 }
-];
-const hardcodedWasteTypeData = [
-  { name: 'Organic', value: 40, color: '#22c55e' },
-  { name: 'Recyclable', value: 30, color: '#3b82f6' },
-  { name: 'Hazardous', value: 10, color: '#f59e0b' },
-  { name: 'General', value: 20, color: '#6b7280' }
-];
-
 export default function Dashboard() {
-  const [stats] = useState(hardcodedStats);
-  const [weeklyData] = useState(hardcodedWeeklyData);
-  const [wasteTypeData] = useState(hardcodedWasteTypeData);
-  const [loading] = useState(false)
-  const [error] = useState<string | null>(null)
-
-  // Remove useEffect and API fetch logic
-
-  const StatCard = ({ 
-    title, 
-    value, 
-    icon: Icon, 
-    color, 
-    change 
-  }: {
-    title: string
-    value: string | number
-    icon: any
-    color: string
-    change?: string
-  }) => (
-    <div className="card">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-2xl font-bold text-gray-900">{value}</p>
-          {change && (
-            <p className="text-sm text-success-600 flex items-center mt-1">
-              <TrendingUp className="w-4 h-4 mr-1" />
-              {change}
-            </p>
-          )}
-        </div>
-        <div className={`p-3 rounded-lg ${color}`}>
-          <Icon className="w-6 h-6 text-white" />
-        </div>
-      </div>
-    </div>
-  )
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-lg text-gray-600">Loading dashboard data...</div>
-      </div>
-    )
+  const stats = {
+    totalCustomers: 1200,
+    totalCollectors: 45,
+    totalWasteCollected: 8740,
+    averageAccuracy: 94.5,
   }
 
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-lg text-red-600">Error: {error}</div>
-      </div>
-    )
-  }
+  const weeklyData = [
+    { day: 'Mon', waste: 120, accuracy: 90 },
+    { day: 'Tue', waste: 150, accuracy: 92 },
+    { day: 'Wed', waste: 170, accuracy: 94 },
+    { day: 'Thu', waste: 160, accuracy: 93 },
+    { day: 'Fri', waste: 180, accuracy: 95 },
+    { day: 'Sat', waste: 200, accuracy: 96 },
+    { day: 'Sun', waste: 190, accuracy: 94 },
+  ]
+
+  const wasteTypeData = [
+    { name: 'Organic', value: 45, color: '#10b981' },
+    { name: 'Plastic', value: 30, color: '#3b82f6' },
+    { name: 'E-waste', value: 15, color: '#f59e0b' },
+    { name: 'Metal', value: 10, color: '#ef4444' },
+  ]
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard Overview</h1>
-        <p className="text-gray-600">Monitor your waste management operations in real-time</p>
+    <div className="dashboard">
+      <div className="dashboard-header">
+        <h1>Dashboard Overview</h1>
+        <p>Monitor your waste management operations in real-time</p>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="dashboard-grid-4">
         <StatCard
           title="Total Customers"
           value={stats.totalCustomers.toLocaleString()}
           icon={Users}
-          color="bg-primary-500"
+          color="bg-primary"
           change="+5.2% this week"
         />
         <StatCard
           title="Active Collectors"
           value={stats.totalCollectors}
           icon={Truck}
-          color="bg-success-500"
+          color="bg-success"
           change="+2.1% this week"
         />
         <StatCard
           title="Waste Collected (kg)"
           value={stats.totalWasteCollected.toLocaleString()}
           icon={Trash2}
-          color="bg-warning-500"
+          color="bg-warning"
           change="+8.7% this week"
         />
         <StatCard
           title="Avg. Accuracy"
           value={`${stats.averageAccuracy}%`}
           icon={CheckCircle}
-          color="bg-success-500"
+          color="bg-success"
           change="+3.2% this week"
         />
       </div>
 
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Weekly Waste Collection Chart */}
+      <div className="dashboard-grid-2">
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Weekly Waste Collection</h3>
+          <h3>Weekly Waste Collection</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={weeklyData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -188,9 +102,8 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        {/* Accuracy Trend Chart */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Accuracy Trend</h3>
+          <h3>Accuracy Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={weeklyData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -203,11 +116,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Bottom Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Waste Type Distribution */}
+      <div className="dashboard-grid-3">
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Waste Type Distribution</h3>
+          <h3>Waste Type Distribution</h3>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
@@ -227,60 +138,79 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        {/* Recent Activity */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-success-500 rounded-full"></div>
-              <div>
-                <p className="text-sm font-medium text-gray-900">Collection completed</p>
-                <p className="text-xs text-gray-500">Route 12 - 2 minutes ago</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-warning-500 rounded-full"></div>
-              <div>
-                <p className="text-sm font-medium text-gray-900">New complaint received</p>
-                <p className="text-xs text-gray-500">Customer #1247 - 5 minutes ago</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-              <div>
-                <p className="text-sm font-medium text-gray-900">New customer registered</p>
-                <p className="text-xs text-gray-500">John Doe - 10 minutes ago</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-success-500 rounded-full"></div>
-              <div>
-                <p className="text-sm font-medium text-gray-900">Reward redeemed</p>
-                <p className="text-xs text-gray-500">Customer #892 - 15 minutes ago</p>
-              </div>
-            </div>
+          <h3>Recent Activity</h3>
+          <div className="recent-activity">
+            <RecentActivityItem status="success" message="Collection completed" time="Route 12 - 2 minutes ago" />
+            <RecentActivityItem status="warning" message="New complaint received" time="Customer #1247 - 5 minutes ago" />
+            <RecentActivityItem status="primary" message="New customer registered" time="John Doe - 10 minutes ago" />
+            <RecentActivityItem status="success" message="Reward redeemed" time="Customer #892 - 15 minutes ago" />
           </div>
         </div>
 
-        {/* Quick Actions */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-          <div className="space-y-3">
-            <button className="w-full bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">
-              Add New Customer
-            </button>
-            <button className="w-full bg-success-500 text-white py-2 px-4 rounded-lg hover:bg-success-600 transition-colors">
-              Schedule Collection
-            </button>
-            <button className="w-full bg-warning-500 text-white py-2 px-4 rounded-lg hover:bg-warning-600 transition-colors">
-              View Complaints
-            </button>
-            <button className="w-full bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">
-              Generate Report
-            </button>
+          <h3>Quick Actions</h3>
+          <div className="quick-actions">
+            <ActionButton label="Add New Customer" color="primary" />
+            <ActionButton label="Schedule Collection" color="success" />
+            <ActionButton label="View Complaints" color="warning" />
+            <ActionButton label="Generate Report" color="gray" />
           </div>
         </div>
       </div>
     </div>
   )
-} 
+}
+
+function StatCard({ title, value, icon: Icon, color, change }) {
+  return (
+    <div className="card stat-card">
+      <div className="stat-card-content">
+        <div>
+          <p className="stat-title">{title}</p>
+          <p className="stat-value">{value}</p>
+          {change && (
+            <p className="stat-change">
+              <TrendingUp className="icon small" />
+              {change}
+            </p>
+          )}
+        </div>
+        <div className={`icon-box ${color}`}>
+          <Icon className="icon white" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RecentActivityItem({ status, message, time }) {
+  const colorMap = {
+    success: 'dot-success',
+    warning: 'dot-warning',
+    primary: 'dot-primary'
+  }
+  return (
+    <div className="recent-item">
+      <div className={`dot ${colorMap[status]}`}></div>
+      <div>
+        <p className="recent-message">{message}</p>
+        <p className="recent-time">{time}</p>
+      </div>
+    </div>
+  )
+}
+
+function ActionButton({ label, color }) {
+  const colorMap = {
+    primary: 'btn-primary',
+    success: 'btn-success',
+    warning: 'btn-warning',
+    gray: 'btn-gray'
+  }
+  return (
+    <button className={`action-btn ${colorMap[color]}`}>
+      {label}
+    </button>
+  )
+}

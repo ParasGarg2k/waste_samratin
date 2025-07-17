@@ -46,7 +46,7 @@ export default function Sidebar({
       {/* Top Section */}
       <div className="sidebar-header">
         {!isCollapsed && (
-          <span className="fw-bold fs-5">Waste Admin</span>
+          <span className="fw-bold fs-5">Waste Samaritin</span>
         )}
         <button
           onClick={() => onCollapsedChange(!isCollapsed)}
