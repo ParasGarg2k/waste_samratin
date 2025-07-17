@@ -14,7 +14,7 @@ export default function HomePage() {
       <Container maxWidth="sm">
         <Paper elevation={6} sx={{ p: 5, borderRadius: 4, bgcolor: 'background.paper', textAlign: 'center' }}>
           <Typography variant="h3" fontWeight={700} color="primary.main" gutterBottom>
-            Waste Samaritan
+            Waste Samaritin
           </Typography>
           <Typography variant="h6" color="primary.700" mb={4}>
             Sustainable Waste Management Platform
