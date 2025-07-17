@@ -1,7 +1,6 @@
-import dynamic from "next/dynamic";
-
-const CustomerApp = dynamic(() => import("./CustomerApp"), { ssr: false });
+// app/customer/page.js (Server Component)
+import CustomerAppWrapper from "./CustomerAppWrapper";
 
 export default function CustomerPage() {
-  return <CustomerApp />;
+  return <CustomerAppWrapper />;
 }
